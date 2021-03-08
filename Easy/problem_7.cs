@@ -13,13 +13,25 @@ public class Solution {
             x = x * -1;
         }
 
+        if ((x >= int.MaxValue) || (x <= int.MinValue)) { 
+            return 0;
+        }
+
         string x_str = new string(x.ToString().Reverse().ToArray());
         
         if ((x > 0 && x <= int.MaxValue) && (negative == false)) {
-            x = Int32.Parse(x_str);
-            return x;
+            try {
+                x = Int32.Parse(x_str);
+                return x;    
+            } catch {
+                return 0;
+            }
         } else if (negative == true) {
-            x = -1 * Int32.Parse(x_str);
+            try {
+                x = -1 * Int32.Parse(x_str);   
+            } catch {
+                return 0;
+            }
 
             if ((x > 0 && x <= int.MaxValue) || (x < 0 && x >= int.MinValue)) {
                 return x;

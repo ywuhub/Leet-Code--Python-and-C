@@ -8,24 +8,18 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 
 public class Solution {
     public int MaxProfit(int[] prices) {
+        int min_price = Int32.MaxValue;
         int max_profit = 0;
-        int curr_price = 0;
-        int curr_profit = 0;
         
-        for (int i = 0; i < prices.Length - 1; i++) {
-            curr_price = prices[i];
-            for (int j = i + 1; j < prices.Length; j++) {
-                curr_profit = prices[j] - curr_price;
-                if (curr_profit > max_profit) {
-                    max_profit = curr_profit;
-                }
-            }   
+        for (int i = 0; i < prices.Length; i++) {
+            if (prices[i] < min_price) {
+                min_price = prices[i];
+            } 
+            else if (prices[i] - min_price > max_profit) {
+                max_profit = prices[i] - min_price;
+            }
         }
         
-        if (max_profit > 0) {
-            return max_profit;
-        } else {
-            return 0;
-        }
+        return max_profit;
     }
 }
